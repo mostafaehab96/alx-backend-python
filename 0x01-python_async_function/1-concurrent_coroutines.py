@@ -12,7 +12,7 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
     """Wait, execute then returns a list of waiting!"""
     waitings = []
     for i in range(n):
-        wait_task = asyncio.create_task(wait_random(max_delay))
-        bisect.insort_left(waitings, await wait_task)
+        wait_time = await wait_random(max_delay)
+        bisect.insort_left(waitings, wait_time)
 
     return waitings
