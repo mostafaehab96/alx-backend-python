@@ -10,4 +10,4 @@ async def measure_time(n: int, max_delay: int) -> float:
     """Returns the time of execution"""
     now = time.time()
     await wait_n(n, max_delay)
-    return time.time() - now
+    return (time.time() - now) / n
