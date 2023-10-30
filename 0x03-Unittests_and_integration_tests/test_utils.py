@@ -6,7 +6,8 @@ Module for testing practices
 
 import unittest
 from parameterized import parameterized
-from utils import access_nested_map
+from utils import access_nested_map, get_json
+from unittest.mock import patch, Mock
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -29,3 +30,20 @@ class TestAccessNestedMap(unittest.TestCase):
         """Testing exception cases"""
         with self.assertRaises(KeyError):
             access_nested_map(nested_map, path)
+
+
+class TestGetJson(unittest.TestCase):
+    """A class for testing get_json function"""
+
+    @parameterized.expand([
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False})
+    ])
+    def test_get_json(self, url, test_payload):
+        """Testing utils.get_json function"""
+
+        with patch("requests.get") as mock_get:
+            mock_get(url).json.return_value = test_payload
+            mock_get.assert_called_once_with(url)
+            result = get_json(url)
+            self.assertEqual(result, test_payload)
