@@ -17,7 +17,7 @@ class TestGithubOrgClient(unittest.TestCase):
         "google",
         "abc"
     ])
-    def test_org(self, org):
+    def test_org(self, org: str):
         """Testing with different inputs"""
         with patch("requests.get") as mock_get:
             mock_get.return_value.json.return_value = {"org": org}
@@ -28,7 +28,7 @@ class TestGithubOrgClient(unittest.TestCase):
         ("google", "google/repos"),
         ("abc", "error")
     ])
-    def test_public_repos_url(self, org, url):
+    def test_public_repos_url(self, org: str, url: str):
         """Testing public repos url"""
         with (patch('client.GithubOrgClient.org', new_callable=PropertyMock)
               as mock_org):
