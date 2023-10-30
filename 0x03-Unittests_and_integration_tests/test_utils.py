@@ -56,12 +56,15 @@ class TestMemoize(unittest.TestCase):
         """Test utils.memoize decorator"""
 
         class TestClass:
+            """Test class"""
 
             def a_method(self):
+                """Test method"""
                 return 42
 
             @memoize
             def a_property(self):
+                """Test property"""
                 return self.a_method()
 
         with (patch.object(TestClass, 'a_method', return_value=42) as
